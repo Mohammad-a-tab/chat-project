@@ -1,8 +1,13 @@
 import { Injectable } from '@nestjs/common';
+import * as fs from 'fs';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  getIndexHtml(): string {
+    try {
+      return fs.readFileSync('index.html', 'utf-8');
+    } catch (error) {
+      throw new Error('Error reading HTML file');
+    }
   }
 }
